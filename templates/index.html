@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EasyPDFTools - Free Online PDF Tools</title>
+<meta name="description" content="Free online PDF tools: convert PDF to Word, Excel and JPG, merge, split, compress and sign PDFs. No signup.">
+<meta property="og:type" content="website"><meta property="og:title" content="EasyPDFTools - Free Online PDF Tools">
+<meta property="og:description" content="Convert, merge, split, compress and sign PDFs online. No signup.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2658744954536274"
+     crossorigin="anonymous"></script>
+<script src="/static/theme.js"></script>
+<link rel="stylesheet" href="/static/app.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"EasyPDFTools","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+<header>
+  <a class="logo" href="/"><b aria-hidden="true">EP</b><span>EasyPDFTools</span></a>
+  <div class="bar">
+    <label class="sr" for="lang">Language</label>
+    <select id="lang"><option value="en">English</option><option value="ar">العربية</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="it">Italiano</option></select>
+    <button class="ico-btn" id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+
+<section class="hero">
+  <h1 data-i="hero">Every PDF tool you need in one place</h1>
+  <p data-i="sub">Fast document conversions with nothing to install and no signup.</p>
+  <label class="sr" for="q">Search tools</label>
+  <input id="q" type="search" data-ph="search" placeholder="Search tools…" autocomplete="off">
+</section>
+
+<main>
+  <nav class="grid" id="grid" aria-label="PDF tools">
+    <a class="card" href="/pdf-to-word"><i aria-hidden="true">📄</i><h2 data-t="0">PDF → Word</h2></a>
+    <a class="card" href="/pdf-to-excel"><i aria-hidden="true">📊</i><h2 data-t="1">PDF → Excel</h2></a>
+    <a class="card" href="/pdf-to-jpg"><i aria-hidden="true">🖼️</i><h2 data-t="2">PDF → JPG</h2></a>
+    <a class="card" href="/pdf-to-text"><i aria-hidden="true">📝</i><h2 data-t="3">PDF → Text</h2></a>
+    <a class="card" href="/word-to-pdf"><i aria-hidden="true">📘</i><h2 data-t="4">Word → PDF</h2></a>
+    <a class="card" href="/excel-to-pdf"><i aria-hidden="true">📗</i><h2 data-t="5">Excel → PDF</h2></a>
+    <a class="card" href="/jpg-to-pdf"><i aria-hidden="true">🌄</i><h2 data-t="6">JPG → PDF</h2></a>
+    <a class="card" href="/merge-pdf"><i aria-hidden="true">🔗</i><h2 data-t="7">Merge PDF</h2></a>
+    <a class="card" href="/split-pdf"><i aria-hidden="true">✂️</i><h2 data-t="8">Split PDF</h2></a>
+    <a class="card" href="/compress-pdf"><i aria-hidden="true">🗜️</i><h2 data-t="9">Compress PDF</h2></a>
+    <a class="card" href="/sign-pdf"><i aria-hidden="true">✍️</i><h2 data-t="10">Sign PDF</h2></a>
+    <a class="card" href="/ocr-pdf"><i aria-hidden="true">✨</i><h2 data-t="11">Scan to Word (OCR)</h2></a>
+  </nav>
+  <p class="empty" id="empty">No matching tools.</p>
+</main>
+
+<footer>
+  <span>© 2026 EasyPDFTools</span>
+  <button class="btn" type="button" data-info="privacy">Privacy</button>
+  <button class="btn" type="button" data-info="terms">Terms</button>
+  <a href="mailto:support@easypdftools.com">Contact</a>
+</footer>
+
+<dialog id="tool" aria-labelledby="tool-title">
+  <button class="btn x" type="button" data-close aria-label="Close">✕</button>
+  <h2 id="tool-title"></h2>
+  <label class="drop" id="drop"><span data-i="pick">Click or drop a file</span><small data-i="note">Processed in memory, never stored. Max 30 MB.</small><input type="file" id="file"></label>
+  <ul class="files" id="files"></ul>
+  <div id="opts"></div>
+  <button class="btn pri" id="go" type="button" data-i="go">Convert &amp; download</button>
+  <p id="msg" role="status" aria-live="polite"></p>
+</dialog>
+
+<dialog id="sign" aria-labelledby="sign-title">
+  <button class="btn x" type="button" data-close aria-label="Close">✕</button>
+  <h2 id="sign-title">Sign PDF</h2>
+  <p class="legal">Runs entirely in your browser: your file is never uploaded. Signatures are image stamps, not certified digital signatures.</p>
+  <label class="drop" id="sdrop"><span>Click or drop a PDF</span><small>Max 30 MB</small><input type="file" id="sfile" accept=".pdf,application/pdf"></label>
+  <div class="row"><span>1. Draw or upload your signature</span>
+    <button class="dot" style="background:#000" data-c="#000000" aria-label="Black" aria-pressed="true"></button>
+    <button class="dot" style="background:#2563eb" data-c="#2563eb" aria-label="Blue" aria-pressed="false"></button>
+    <button class="dot" style="background:#dc2626" data-c="#dc2626" aria-label="Red" aria-pressed="false"></button>
+    <button class="btn" type="button" id="supl">Upload</button><button class="btn" type="button" id="sclr">Clear</button>
+    <input type="file" id="simg" accept="image/*" hidden></div>
+  <canvas id="pad" aria-label="Signature pad"></canvas>
+  <div id="viewer" hidden>
+    <div class="row"><span>2. Click the page to place it</span>
+      <label><input type="checkbox" id="all"> All pages</label>
+      <button class="btn" type="button" id="undo">Undo</button></div>
+    <div class="row" style="justify-content:center"><button class="btn" type="button" id="prev" aria-label="Previous page">‹</button><span id="pn" aria-live="polite"></span><button class="btn" type="button" id="next" aria-label="Next page">›</button></div>
+    <div class="pg"><canvas id="pdfc"></canvas><div class="ov" id="ov"></div></div>
+    <button class="btn pri" id="sdl" type="button" style="margin-top:14px">Download signed PDF</button>
+  </div>
+  <p id="smsg" role="status" aria-live="polite"></p>
+</dialog>
+
+<dialog id="privacy"><button class="btn x" type="button" data-close aria-label="Close">✕</button><h2>Privacy</h2><div class="legal">
+<p><b>Your files.</b> Uploaded files are processed in server memory to produce your result and are not saved, analysed or shared.</p>
+<p><b>Scan to Word (OCR).</b> The first pages of your file are sent as images to Google Cloud Vision to recognise text.</p>
+<p><b>Sign PDF.</b> Runs in your browser; the file never leaves your device.</p>
+<p><b>Logs.</b> Our host (Google Cloud) keeps standard request logs such as IP address, time and URL for security and operations. We don't require an account.</p></div></dialog>
+<dialog id="terms"><button class="btn x" type="button" data-close aria-label="Close">✕</button><h2>Terms</h2><div class="legal">
+<p>Use the service lawfully and only with files you have the right to process.</p>
+<p>The service is provided "as is", without warranties. Check results before relying on them.</p>
+<p>Limits: 30 MB per request. Requests may be rate-limited to keep the service available.</p></div></dialog>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

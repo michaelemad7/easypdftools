@@ -1,0 +1,17 @@
+# Version ranges, not exact pins. After you've deployed and tested once, lock the
+# exact versions that worked:  pip freeze > requirements.lock  (and install from that).
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30,<1.0
+python-multipart>=0.0.18,<1.0
+httpx>=0.27,<1.0
+
+pypdf[crypto]>=5.1,<7.0
+pypdfium2>=4.30,<6.0
+python-docx>=1.1,<2.0
+openpyxl>=3.1.5,<4.0
+reportlab>=4.2.5,<5.0
+pillow>=11.0,<13.0
+
+# Arabic shaping + right-to-left ordering in generated PDFs (optional but recommended)
+arabic-reshaper>=3.0,<4.0
+python-bidi>=0.4.2,<1.0
