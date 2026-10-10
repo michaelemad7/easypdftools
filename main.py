@@ -485,6 +485,7 @@ def render_page(slug: str = "") -> str:
         
         if title:
             page = re.sub(r"<title>.*?</title>", lambda _: f"<title>{html.escape(title)} | EasyPDFTools</title>", page, count=1, flags=re.S)
+            page = re.sub(r'(<h1\s+data-i="hero">)(.*?)(</h1>)', rf'\1{html.escape(title)}\3', page, count=1, flags=re.S)
         if description:
             page = re.sub(r'(<meta\s+name="description"\s+content=")[^"]*(")', lambda m: m.group(1) + html.escape(description, quote=True) + m.group(2), page, count=1)
             
