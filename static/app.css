@@ -39,3 +39,8 @@ ul.files{list-style:none;margin:10px 0;padding:0;font-size:14px}ul.files li{disp
 .faq-item:last-of-type{padding-bottom:0}
 .faq-item h3{margin:0 0 8px;font-size:16px;font-weight:700}
 .faq-item p{margin:0;color:var(--mut);font-size:14.5px;line-height:1.6}
+.seo{width:min(800px,100%);margin:24px auto;padding:0 16px}
+.seo h2{font-size:22px;margin-top:24px}
+.seo h3{font-size:17px;margin:16px 0 4px}
+.seo p,.seo li{color:var(--mut);line-height:1.6}
+.seo ol{padding-inline-start:20px}

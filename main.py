@@ -56,7 +56,7 @@ MAX_FILE_MB = MAX_FILE_BYTES / (1024 * 1024)
 MAX_FILES = int(os.getenv("MAX_FILES", "20"))
 MAX_CONCURRENT_JOBS = int(os.getenv("MAX_CONCURRENT_JOBS", "3"))
 RATE_LIMIT_PER_MIN = int(os.getenv("RATE_LIMIT_PER_MIN", "20"))
-OCR_LIMIT_PER_HOUR = int(os.getenv("OCR_LIMIT_PER_HOUR", "10"))
+OCR_LIMIT_PER_HOUR = int(os.getenv("OCR_LIMIT_PER_HOUR", "3600"))
 XFF_HOPS = max(1, int(os.getenv("XFF_HOPS", "1")))
 VISION_API_KEY = os.getenv("GCP_VISION_API_KEY", "")
 
@@ -97,8 +97,11 @@ def load_seo_pages() -> dict:
                 if slug:
                     pages[slug] = {
                         "title": item.get("title", ""),
+                        "h1": item.get("h1", ""),
                         "meta_description": item.get("meta_description", ""),
                         "core_tool": item.get("core_tool", slug),
+                        "intro": item.get("intro", []),
+                        "steps": item.get("steps", []),
                         "faqs": item.get("faqs", [])
                     }
             if pages:
@@ -200,8 +203,6 @@ async def common_headers(request: Request, call_next):
         headers.setdefault("Strict-Transport-Security", "max-age=31536000")
     if request.url.path.startswith("/api/"):
         headers["Cache-Control"] = "no-store"
-    # Content-Security-Policy is added together with the new front end (it must match
-    # the scripts/styles the page loads).
     return response
 
 
@@ -437,34 +438,53 @@ app.include_router(api)
 # Pages, health check and SEO files
 # --------------------------------------------------------------------------------------
 
-def _build_faq_ld_and_html(faqs: list[dict]) -> tuple[str, str]:
-    if not faqs:
-        return "", ""
-    main_entities = []
-    html_items = ['<div class="faq-container"><h2>Frequently Asked Questions</h2>']
-    for faq in faqs:
-        q = (faq.get("question") or faq.get("q") or "").strip()
-        a = (faq.get("answer") or faq.get("a") or "").strip()
-        if not q or not a:
-            continue
-        main_entities.append({
-            "@type": "Question",
-            "name": q,
-            "acceptedAnswer": {"@type": "Answer", "text": a}
-        })
-        html_items.append(f'<div class="faq-item"><h3>{html.escape(q)}</h3><p>{html.escape(a)}</p></div>')
+def _build_seo_content(page_info: dict) -> tuple[str, str, str]:
+    if not page_info:
+        return "", "", ""
+        
+    h1_text = page_info.get("h1") or page_info.get("title", "")
+    intro_paragraphs = page_info.get("intro", [])
+    steps = page_info.get("steps", [])
+    faqs = page_info.get("faqs", [])
     
-    html_items.append("</div>")
-    if not main_entities:
-        return "", ""
-
-    ld_struct = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": main_entities
-    }
-    ld_script = f'<script type="application/ld+json">{json.dumps(ld_struct)}</script>'
-    return ld_script, "\n".join(html_items)
+    html_parts = []
+    main_entities = []
+    
+    if intro_paragraphs:
+        for p in intro_paragraphs:
+            html_parts.append(f"<p>{html.escape(p)}</p>")
+            
+    if steps:
+        html_parts.append("<h3>How to use</h3><ol>")
+        for step in steps:
+            html_parts.append(f"<li>{html.escape(step)}</li>")
+        html_parts.append("</ol>")
+        
+    if faqs:
+        html_parts.append("<h2>Frequently Asked Questions</h2>")
+        for faq in faqs:
+            q = (faq.get("question") or faq.get("q") or "").strip()
+            a = (faq.get("answer") or faq.get("a") or "").strip()
+            if not q or not a:
+                continue
+            main_entities.append({
+                "@type": "Question",
+                "name": q,
+                "acceptedAnswer": {"@type": "Answer", "text": a}
+            })
+            html_parts.append(f'<div class="faq-item"><h3>{html.escape(q)}</h3><p>{html.escape(a)}</p></div>')
+            
+    ld_script = ""
+    if main_entities:
+        ld_struct = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": main_entities
+        }
+        safe_json = json.dumps(ld_struct).replace("</", "<\\/")
+        ld_script = f'<script type="application/ld+json">{safe_json}</script>'
+        
+    return h1_text, ld_script, "\n".join(html_parts)
 
 @lru_cache(maxsize=None)
 def _template() -> str:
@@ -472,7 +492,7 @@ def _template() -> str:
 
 @lru_cache(maxsize=None)
 def render_page(slug: str = "") -> str:
-    """Serve index.html with a per-tool <title>, description and canonical URL."""
+    """Serve index.html with a per-tool server-rendered title, description, h1, intro, and FAQs."""
     page = _template()
     slug_clean = slug.strip("/")
     page_info = SEO_PAGES.get(slug_clean)
@@ -481,16 +501,19 @@ def render_page(slug: str = "") -> str:
         title = page_info.get("title", "")
         description = page_info.get("meta_description", "")
         core_tool = page_info.get("core_tool", slug_clean)
-        faqs = page_info.get("faqs", [])
+        
+        h1_text, faq_ld, seo_html = _build_seo_content(page_info)
         
         if title:
             page = re.sub(r"<title>.*?</title>", lambda _: f"<title>{html.escape(title)} | EasyPDFTools</title>", page, count=1, flags=re.S)
-            page = re.sub(r'(<h1\s+data-i="hero">)(.*?)(</h1>)', rf'\1{html.escape(title)}\3', page, count=1, flags=re.S)
+            page = re.sub(r'<meta\s+property="og:title"\s+content="[^"]*">', lambda _: f'<meta property="og:title" content="{html.escape(title)} | EasyPDFTools">', page, count=1)
         if description:
-            page = re.sub(r'(<meta\s+name="description"\s+content=")[^"]*(")', lambda m: m.group(1) + html.escape(description, quote=True) + m.group(2), page, count=1)
+            page = re.sub(r'<meta\s+name="description"\s+content="[^"]*">', lambda _: f'<meta name="description" content="{html.escape(description, quote=True)}">', page, count=1)
+            page = re.sub(r'<meta\s+property="og:description"\s+content="[^"]*">', lambda _: f'<meta property="og:description" content="{html.escape(description, quote=True)}">', page, count=1)
             
-        faq_ld, faq_html = _build_faq_ld_and_html(faqs)
-        
+        if h1_text:
+            page = re.sub(r'<h1[^>]*>.*?</h1>', lambda _: f'<h1>{html.escape(h1_text)}</h1>', page, count=1, flags=re.S)
+            
         head_injections = []
         if core_tool:
             head_injections.append(f'<meta name="core-tool" content="{html.escape(core_tool, quote=True)}">')
@@ -503,8 +526,9 @@ def render_page(slug: str = "") -> str:
         if head_injections:
             page = page.replace("</head>", "\n".join(head_injections) + "\n</head>", 1)
             
-        if faq_html:
-            page = re.sub(r'(<section\s+id="faq-section"[^>]*>)(.*?)(</section>)', rf"\1\n{faq_html}\n\3", page, count=1, flags=re.S)
+        if seo_html:
+            seo_block = f'<section id="faq-section" class="seo">{seo_html}</section>'
+            page = re.sub(r'<section\s+id="faq-section"[^>]*>.*?</section>', lambda _: seo_block, page, count=1, flags=re.S)
             
     else:
         if 'rel="canonical"' not in page:
