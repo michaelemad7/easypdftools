@@ -1,0 +1,134 @@
+[
+  {
+    "slug": "compress-pdf-for-email",
+    "core_tool": "compress-pdf",
+    "title": "Compress PDF for Email",
+    "meta_title": "Compress PDF for Email Attachment Free | EasyPDFTools",
+    "meta_description": "Quickly reduce PDF file sizes to bypass the 25MB Gmail and Outlook attachment limits. Free, fast, and processes entirely in your browser.",
+    "faqs": [
+      {"q": "What is the maximum PDF size for email?", "a": "Gmail and Yahoo limit attachments to 25MB, while Outlook limits them to 20MB. Our tool reduces your PDF to safely fit under these limits."},
+      {"q": "Will compression ruin my document?", "a": "No. We use intelligent downscaling that optimizes images and removes invisible metadata while keeping all text perfectly crisp and readable."}
+    ]
+  },
+  {
+    "slug": "compress-pdf-under-100kb",
+    "core_tool": "compress-pdf",
+    "title": "Compress PDF Under 100KB",
+    "meta_title": "Compress PDF Under 100KB Free | EasyPDFTools",
+    "meta_description": "Shrink PDF files to under 100KB for government portals, university applications, and strict web forms.",
+    "faqs": [
+      {"q": "How do I compress a PDF to under 100KB?", "a": "Upload your file and select the 'Maximum' compression level. This aggressively optimizes image streams to hit strict government and academic upload limits."},
+      {"q": "Are my sensitive documents stored?", "a": "Never. EasyPDFTools processes everything in memory and automatically drops the file the moment your download begins."}
+    ]
+  },
+  {
+    "slug": "convert-bank-statement-to-excel",
+    "core_tool": "pdf-to-excel",
+    "title": "Convert Bank Statement to Excel",
+    "meta_title": "Convert PDF Bank Statements to Excel (.xlsx) | EasyPDFTools",
+    "meta_description": "Extract tables, transaction histories, and financial data from PDF bank statements directly into an editable Excel spreadsheet.",
+    "faqs": [
+      {"q": "Does this tool keep the table formatting?", "a": "Yes. Our extraction engine specifically looks for tabular data and recreates the rows and columns accurately in the resulting .xlsx file."},
+      {"q": "Is it safe to upload financial statements?", "a": "Absolutely. Files are processed securely in temporary server memory and are never saved to disk, ensuring your financial privacy."}
+    ]
+  },
+  {
+    "slug": "convert-pdf-invoice-to-excel",
+    "core_tool": "pdf-to-excel",
+    "title": "Convert PDF Invoice to Excel",
+    "meta_title": "Convert PDF Invoices to Excel Spreadsheets | EasyPDFTools",
+    "meta_description": "Turn digital PDF invoices and purchase orders into structured Excel data for easier accounting and bookkeeping.",
+    "faqs": [
+      {"q": "Can I convert multiple invoices?", "a": "Currently, you can process one PDF invoice at a time. If your PDF contains multiple pages of invoices, they will all be exported into a single workbook."},
+      {"q": "What if my invoice is a scanned image?", "a": "If the invoice is a flat image without selectable text, use our 'Scan to Word (OCR)' tool first to extract the data."}
+    ]
+  },
+  {
+    "slug": "scan-arabic-pdf-to-word",
+    "core_tool": "ocr-pdf",
+    "title": "Scan Arabic PDF to Word",
+    "meta_title": "Arabic PDF to Word OCR Converter | EasyPDFTools",
+    "meta_description": "Extract right-to-left (RTL) Arabic text from scanned PDFs and images into an editable Word document using Google Vision OCR.",
+    "faqs": [
+      {"q": "Does this support right-to-left (RTL) formatting?", "a": "Yes. Our OCR engine natively recognizes Arabic script and formats the resulting Word document to respect right-to-left reading order."},
+      {"q": "Can it read mixed Arabic and English text?", "a": "Yes. Select 'Arabic + English' in the language settings before converting, and the engine will seamlessly handle bilingual documents."}
+    ]
+  },
+  {
+    "slug": "extract-text-from-scanned-receipt",
+    "core_tool": "ocr-pdf",
+    "title": "Extract Text from Scanned Receipt",
+    "meta_title": "Scanned Receipt to Word OCR Converter | EasyPDFTools",
+    "meta_description": "Digitize paper receipts and printed bills by extracting the text into an editable Word document for expense reporting.",
+    "faqs": [
+      {"q": "How accurate is the receipt scanner?", "a": "We use Google Cloud Vision, which is highly accurate at reading faded ink, crumpled paper, and small receipt fonts."},
+      {"q": "Do I need to crop the receipt first?", "a": "No, the AI will automatically detect the text blocks anywhere on the page, regardless of the background."}
+    ]
+  },
+  {
+    "slug": "merge-tax-returns-pdf",
+    "core_tool": "merge-pdf",
+    "title": "Merge Tax Returns & W2s",
+    "meta_title": "Merge Tax Returns and Financial Documents PDF | EasyPDFTools",
+    "meta_description": "Securely combine multiple tax documents, W2s, and 1099s into a single PDF file for your accountant or tax portal.",
+    "faqs": [
+      {"q": "Is it safe to merge tax documents here?", "a": "Yes. Your highly sensitive tax documents are processed strictly in RAM and are never written to a database or storage bucket."},
+      {"q": "Can I reorder the pages?", "a": "Yes. In the tool window, you can use the up and down arrows to arrange your W2s, schedules, and main returns in the exact order you need."}
+    ]
+  },
+  {
+    "slug": "combine-bank-statements-pdf",
+    "core_tool": "merge-pdf",
+    "title": "Combine PDF Bank Statements",
+    "meta_title": "Combine Monthly Bank Statements into One PDF | EasyPDFTools",
+    "meta_description": "Merge 12 months of PDF bank statements into a single, organized document for mortgage applications or auditing.",
+    "faqs": [
+      {"q": "Is there a limit to how many statements I can merge?", "a": "You can merge up to 20 individual PDF files at one time, as long as the total combined size is under 30MB."},
+      {"q": "Will the merged file be huge?", "a": "Merging simply stitches the files together. If the resulting file is too large to email to your broker, use our Compress PDF tool afterward."}
+    ]
+  },
+  {
+    "slug": "extract-single-page-from-pdf",
+    "core_tool": "split-pdf",
+    "title": "Extract a Single Page from PDF",
+    "meta_title": "Extract Single Page from PDF Document | EasyPDFTools",
+    "meta_description": "Pull out one specific page from a large PDF document and save it as its own standalone file.",
+    "faqs": [
+      {"q": "How do I extract just one page?", "a": "Upload your file, and in the 'Page ranges' box, type the exact page number you want (for example, '5')."},
+      {"q": "Will extracting a page reduce the quality?", "a": "No. The page is extracted identically to the original without any recompression or quality loss."}
+    ]
+  },
+  {
+    "slug": "split-pdf-chapters",
+    "core_tool": "split-pdf",
+    "title": "Split PDF into Chapters",
+    "meta_title": "Split PDF Ebooks & Textbooks into Chapters | EasyPDFTools",
+    "meta_description": "Break large PDF textbooks or manuals into smaller, manageable chapter files by specifying page ranges.",
+    "faqs": [
+      {"q": "How do I split a book into multiple chapters?", "a": "Use comma-separated ranges. For example, typing '1-15, 16-40, 41-100' will give you three separate PDF files for those exact chapter ranges."},
+      {"q": "How do I receive the split files?", "a": "The chapters are instantly packaged into a single ZIP file so you can download them all at once."}
+    ]
+  },
+  {
+    "slug": "sign-nda-pdf-online",
+    "core_tool": "sign-pdf",
+    "title": "Sign NDA PDF Online",
+    "meta_title": "Sign Non-Disclosure Agreements (NDA) Online | EasyPDFTools",
+    "meta_description": "Draw your signature and instantly stamp it onto a Non-Disclosure Agreement (NDA) entirely in your browser.",
+    "faqs": [
+      {"q": "Is my confidential NDA uploaded to your servers?", "a": "No. Our signature tool runs 100% locally in your web browser. The NDA never leaves your computer."},
+      {"q": "Are these legally binding signatures?", "a": "This tool applies a standard electronic image stamp of your signature, which is widely accepted for standard NDAs and contracts, but it is not a cryptographically certified digital signature."}
+    ]
+  },
+  {
+    "slug": "sign-lease-agreement-pdf",
+    "core_tool": "sign-pdf",
+    "title": "Sign Lease Agreement PDF",
+    "meta_title": "Sign Rental & Lease Agreements Online | EasyPDFTools",
+    "meta_description": "Quickly sign rental contracts and lease agreements from your phone or desktop. No printing or scanning required.",
+    "faqs": [
+      {"q": "Can I sign on my phone?", "a": "Yes! The signature pad is fully touch-responsive. Just draw your signature with your finger and place it on the contract."},
+      {"q": "How do I place the signature?", "a": "Once you draw your signature, click 'All pages' to stamp it everywhere, or navigate to the specific signature line and click to drop it into place."}
+    ]
+  }
+]
