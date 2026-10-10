@@ -56,7 +56,7 @@ MAX_FILE_MB = MAX_FILE_BYTES / (1024 * 1024)
 MAX_FILES = int(os.getenv("MAX_FILES", "20"))
 MAX_CONCURRENT_JOBS = int(os.getenv("MAX_CONCURRENT_JOBS", "3"))
 RATE_LIMIT_PER_MIN = int(os.getenv("RATE_LIMIT_PER_MIN", "20"))
-OCR_LIMIT_PER_HOUR = int(os.getenv("OCR_LIMIT_PER_HOUR", "3600"))
+OCR_LIMIT_PER_HOUR = int(os.getenv("OCR_LIMIT_PER_HOUR", "10"))
 XFF_HOPS = max(1, int(os.getenv("XFF_HOPS", "1")))
 VISION_API_KEY = os.getenv("GCP_VISION_API_KEY", "")
 
@@ -97,6 +97,7 @@ def load_seo_pages() -> dict:
                 if slug:
                     pages[slug] = {
                         "title": item.get("title", ""),
+                        "meta_title": item.get("meta_title", ""),
                         "h1": item.get("h1", ""),
                         "meta_description": item.get("meta_description", ""),
                         "core_tool": item.get("core_tool", slug),
@@ -455,25 +456,27 @@ def _build_seo_content(page_info: dict) -> tuple[str, str, str]:
             html_parts.append(f"<p>{html.escape(p)}</p>")
             
     if steps:
-        html_parts.append("<h3>How to use</h3><ol>")
+        html_parts.append("<h2>How to use this tool</h2><ol>")
         for step in steps:
             html_parts.append(f"<li>{html.escape(step)}</li>")
         html_parts.append("</ol>")
         
-    if faqs:
-        html_parts.append("<h2>Frequently Asked Questions</h2>")
-        for faq in faqs:
-            q = (faq.get("question") or faq.get("q") or "").strip()
-            a = (faq.get("answer") or faq.get("a") or "").strip()
-            if not q or not a:
-                continue
-            main_entities.append({
-                "@type": "Question",
-                "name": q,
-                "acceptedAnswer": {"@type": "Answer", "text": a}
-            })
-            html_parts.append(f'<div class="faq-item"><h3>{html.escape(q)}</h3><p>{html.escape(a)}</p></div>')
-            
+    faq_parts = []
+    for faq in faqs:
+        q = (faq.get("question") or faq.get("q") or "").strip()
+        a = (faq.get("answer") or faq.get("a") or "").strip()
+        if not q or not a:
+            continue
+        main_entities.append({
+            "@type": "Question",
+            "name": q,
+            "acceptedAnswer": {"@type": "Answer", "text": a}
+        })
+        faq_parts.append(f'<div class="faq-item"><h3>{html.escape(q)}</h3><p>{html.escape(a)}</p></div>')
+    if faq_parts:
+        html_parts.append("<h2>Frequently asked questions</h2>")
+        html_parts.extend(faq_parts)
+
     ld_script = ""
     if main_entities:
         ld_struct = {
@@ -491,9 +494,18 @@ def _template() -> str:
     return (BASE_DIR / "templates" / "index.html").read_text(encoding="utf-8")
 
 @lru_cache(maxsize=None)
+def _guides_html() -> str:
+    """<li> links to every page that is not one of the 12 main tools (fills <!--GUIDES-->)."""
+    return "".join(
+        f'<li><a href="/{slug}">{html.escape(info.get("title") or slug)}</a></li>'
+        for slug, info in SEO_PAGES.items()
+        if slug not in DEFAULT_PAGES
+    )
+
+@lru_cache(maxsize=None)
 def render_page(slug: str = "") -> str:
     """Serve index.html with a per-tool server-rendered title, description, h1, intro, and FAQs."""
-    page = _template()
+    page = _template().replace("<!--GUIDES-->", _guides_html())
     slug_clean = slug.strip("/")
     page_info = SEO_PAGES.get(slug_clean)
     
@@ -505,8 +517,9 @@ def render_page(slug: str = "") -> str:
         h1_text, faq_ld, seo_html = _build_seo_content(page_info)
         
         if title:
-            page = re.sub(r"<title>.*?</title>", lambda _: f"<title>{html.escape(title)} | EasyPDFTools</title>", page, count=1, flags=re.S)
-            page = re.sub(r'<meta\s+property="og:title"\s+content="[^"]*">', lambda _: f'<meta property="og:title" content="{html.escape(title)} | EasyPDFTools">', page, count=1)
+            tag = page_info.get("meta_title") or f"{title} | EasyPDFTools"
+            page = re.sub(r"<title>.*?</title>", lambda _: f"<title>{html.escape(tag)}</title>", page, count=1, flags=re.S)
+            page = re.sub(r'<meta\s+property="og:title"\s+content="[^"]*">', lambda _: f'<meta property="og:title" content="{html.escape(tag, quote=True)}">', page, count=1)
         if description:
             page = re.sub(r'<meta\s+name="description"\s+content="[^"]*">', lambda _: f'<meta name="description" content="{html.escape(description, quote=True)}">', page, count=1)
             page = re.sub(r'<meta\s+property="og:description"\s+content="[^"]*">', lambda _: f'<meta property="og:description" content="{html.escape(description, quote=True)}">', page, count=1)

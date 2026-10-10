@@ -1,134 +1,514 @@
 [
   {
+    "slug": "pdf-to-word",
+    "core_tool": "pdf-to-word",
+    "title": "PDF to Word Converter",
+    "meta_title": "PDF to Word Converter - Free, No Signup | EasyPDFTools",
+    "meta_description": "Convert a PDF into an editable Word (.docx) file online. Free, no signup. Best for PDFs with selectable text; files are processed temporarily and not kept.",
+    "intro": [
+      "This tool turns a PDF into an editable Word (.docx) document. It reads the text on each page and rebuilds it as paragraphs, headings, bullet lists and simple tables, so you can edit the content in Microsoft Word, Google Docs or LibreOffice.",
+      "It works best on PDFs created from a word processor, where the text can be selected. Pictures, custom fonts, multi-column pages and complex layouts are not reproduced exactly, so expect to tidy the result. If your PDF is a scan or a photo, use the Scan to Word (OCR) tool instead."
+    ],
+    "steps": [
+      "Click the upload area or drop your PDF onto it (up to 30 MB).",
+      "Press Convert & download.",
+      "Open the .docx file in Word and review the headings, lists and tables."
+    ],
+    "faqs": [
+      {"q": "Is the PDF to Word converter free?", "a": "Yes. There is no signup and no fee. Each file can be up to 30 MB."},
+      {"q": "Will the layout and images stay the same?", "a": "Not exactly. The text is rebuilt as paragraphs, headings, bullet lists and simple tables. Images, custom fonts and multi-column layouts are not reproduced, so plan to tidy the document in Word."},
+      {"q": "Can it convert a scanned PDF?", "a": "Not with this tool, because a scan holds pictures of text rather than real text. Use Scan to Word (OCR) for scanned pages."},
+      {"q": "Does it work with Arabic or other right-to-left text?", "a": "Right-to-left text is detected and set right-to-left in the Word file. PDFs store Arabic in different ways, so check the result. For scanned Arabic documents, use the OCR tool and choose Arabic."},
+      {"q": "Are my files kept?", "a": "Your file is processed temporarily on our server to create the Word document. It is not kept or shared."}
+    ]
+  },
+  {
+    "slug": "pdf-to-excel",
+    "core_tool": "pdf-to-excel",
+    "title": "PDF to Excel Converter",
+    "meta_title": "PDF to Excel Converter (.xlsx) - Free, No Signup | EasyPDFTools",
+    "meta_description": "Turn the text and tables in a PDF into an Excel (.xlsx) spreadsheet. Free and no signup. Works on PDFs with selectable text; check the results.",
+    "intro": [
+      "This tool reads the text on every page of a PDF and splits each line into spreadsheet cells wherever it finds a wide gap between columns. The result is an Excel (.xlsx) file with one worksheet called Extracted, with a Page label above the content of each page.",
+      "Numbers such as 1,234.50 are saved as real numbers so you can calculate with them, while long IDs and values with leading zeros stay as text. Results depend on how the PDF was made, so always compare the totals with the original."
+    ],
+    "steps": [
+      "Upload a PDF that contains selectable text (up to 30 MB).",
+      "Press Convert & download.",
+      "Open the .xlsx file, check the column alignment and adjust where needed."
+    ],
+    "faqs": [
+      {"q": "How accurate is the table extraction?", "a": "Clean tables with clear spacing between columns usually convert well. Complex layouts, merged cells and tables without clear gaps may need manual fixing in Excel."},
+      {"q": "Will every page get its own sheet?", "a": "No. All pages go into a single worksheet, and each page starts with a label such as Page 1."},
+      {"q": "Does it work on scanned PDFs?", "a": "No. A scan holds pictures of text. The Scan to Word (OCR) tool can read scanned pages into a Word document, which you can then copy into Excel."},
+      {"q": "Are formulas created?", "a": "No. The file contains values only, and numbers are stored as numbers where possible."}
+    ]
+  },
+  {
+    "slug": "pdf-to-jpg",
+    "core_tool": "pdf-to-jpg",
+    "title": "PDF to JPG Converter",
+    "meta_title": "PDF to JPG Converter - Every Page as an Image | EasyPDFTools",
+    "meta_description": "Convert every page of a PDF into a JPG image and download them together in one ZIP file. Free, no signup, up to 100 pages.",
+    "intro": [
+      "This tool renders each page of your PDF as a separate JPG image at 150 DPI, which is clear enough for screens, slides and sharing. All the images are packed into one ZIP file named page_001.jpg, page_002.jpg and so on.",
+      "It supports PDFs of up to 100 pages at a time. For a longer document, use the Split PDF tool first and convert the parts one by one."
+    ],
+    "steps": [
+      "Upload your PDF (up to 30 MB and 100 pages).",
+      "Press Convert & download.",
+      "Unzip the downloaded file to get one JPG per page."
+    ],
+    "faqs": [
+      {"q": "Can I convert only some pages?", "a": "Not directly. Use Split PDF to extract the pages you need, then convert that smaller PDF."},
+      {"q": "What resolution are the images?", "a": "Pages are rendered at 150 DPI with high JPG quality. That is suitable for viewing and sharing, but not for large-format printing."},
+      {"q": "Is there a page limit?", "a": "Yes, up to 100 pages per file. Longer PDFs should be split first."}
+    ]
+  },
+  {
+    "slug": "pdf-to-text",
+    "core_tool": "pdf-to-text",
+    "title": "PDF to Text Converter",
+    "meta_title": "PDF to Text Converter - Extract Plain Text | EasyPDFTools",
+    "meta_description": "Extract the plain text from a PDF into a .txt file. Free and no signup. Works on PDFs with selectable text, not on scanned pages.",
+    "intro": [
+      "This tool pulls the text out of a PDF and saves it as a plain .txt file with no fonts, colours or images. It is useful when you want to copy content into notes, a code editor, a translation tool or a search index.",
+      "It only works when the PDF contains real, selectable text. If the file is a scan or a photo, there is nothing to extract, and the Scan to Word (OCR) tool is the right choice."
+    ],
+    "steps": [
+      "Upload your PDF (up to 30 MB).",
+      "Press Convert & download.",
+      "Open the .txt file in any text editor."
+    ],
+    "faqs": [
+      {"q": "Does it keep the layout?", "a": "No. You get the text only. Columns, tables and page design are not preserved."},
+      {"q": "Why do I get an error about no text?", "a": "The PDF probably contains scanned images instead of text. Use Scan to Word (OCR) for those files."},
+      {"q": "Are all pages included?", "a": "Yes. The text of every page is included, in page order."}
+    ]
+  },
+  {
+    "slug": "word-to-pdf",
+    "core_tool": "word-to-pdf",
+    "title": "Word to PDF Converter",
+    "meta_title": "Word to PDF Converter (.docx) - Free, No Signup | EasyPDFTools",
+    "meta_description": "Convert a Word (.docx) document to PDF online. Free and no signup. Handles text, headings, lists and tables; check pictures and complex layouts.",
+    "intro": [
+      "This tool converts a Word (.docx) document into a PDF that opens the same way on any phone, computer or printer. It reads your headings, paragraphs, lists and tables, and uses the page size and margins from your document.",
+      "It is a simplified converter, not Microsoft Word itself. Pictures, text boxes, headers and footers and unusual layouts may not carry over, so check the PDF before you send it."
+    ],
+    "steps": [
+      "Upload your .docx file (up to 30 MB).",
+      "Press Convert & download.",
+      "Open the PDF and check the layout before sharing it."
+    ],
+    "faqs": [
+      {"q": "Does it accept old .doc files?", "a": "No. Only .docx files are supported. In Word, choose Save As and pick the .docx format first."},
+      {"q": "Do I need Microsoft Word installed?", "a": "No. The conversion happens on our server, so you do not need any Office software."},
+      {"q": "Will my formatting be identical?", "a": "Text, headings, lists and tables are kept. Pictures, text boxes and complex layouts may differ, so review the result."},
+      {"q": "Are my files kept?", "a": "Your document is processed temporarily to create the PDF and is not kept or shared."}
+    ]
+  },
+  {
+    "slug": "excel-to-pdf",
+    "core_tool": "excel-to-pdf",
+    "title": "Excel to PDF Converter",
+    "meta_title": "Excel to PDF Converter (.xlsx) - Free, No Signup | EasyPDFTools",
+    "meta_description": "Convert an Excel (.xlsx) workbook into a clean PDF table. Free and no signup. Visible sheets only; charts and cell styling are not included.",
+    "intro": [
+      "This tool turns the data in an Excel (.xlsx) workbook into a tidy PDF table that is easy to print or share. Every visible sheet is included, and the page switches to landscape when a sheet has more than six columns.",
+      "Formulas show their last calculated value. The PDF is a clean table of your data, so charts, pictures and cell colours are not reproduced. Very large workbooks are cut off at 5,000 rows in total."
+    ],
+    "steps": [
+      "Upload your .xlsx workbook (up to 30 MB).",
+      "Press Convert & download.",
+      "Check the PDF to make sure the columns and rows look right."
+    ],
+    "faqs": [
+      {"q": "Are hidden sheets included?", "a": "No. Only visible sheets are converted."},
+      {"q": "Does it accept old .xls files?", "a": "No. Only .xlsx workbooks are supported. Save older files as .xlsx in Excel first."},
+      {"q": "Are charts and colours kept?", "a": "No. The PDF contains a clean table of your data without charts, pictures or cell styling."},
+      {"q": "Is there a row limit?", "a": "Yes. Very large workbooks are cut off at 5,000 rows in total."}
+    ]
+  },
+  {
+    "slug": "jpg-to-pdf",
+    "core_tool": "jpg-to-pdf",
+    "title": "JPG to PDF Converter",
+    "meta_title": "JPG to PDF Converter - Combine Images into One PDF | EasyPDFTools",
+    "meta_description": "Combine JPG and PNG images into a single PDF, one image per page, in the order you choose. Free and no signup.",
+    "intro": [
+      "This tool places each JPG, JPEG or PNG image on its own page of a single PDF. Pages are A4, and the orientation switches between portrait and landscape to suit each image, with a small margin around it.",
+      "You can add several files at once and move them up or down to set the page order before converting. It is handy for photographed documents, screenshots, receipts and forms."
+    ],
+    "steps": [
+      "Add your images (JPG, JPEG or PNG, up to 20 files and 30 MB in total).",
+      "Use the arrow buttons to put them in the right order.",
+      "Press Convert & download."
+    ],
+    "faqs": [
+      {"q": "Which image formats work?", "a": "JPG, JPEG and PNG files."},
+      {"q": "Can I change the page order?", "a": "Yes. Use the up and down arrows next to each file before converting."},
+      {"q": "Is there a limit on the number of images?", "a": "You can add up to 20 images per request, with a combined size of up to 30 MB."}
+    ]
+  },
+  {
+    "slug": "merge-pdf",
+    "core_tool": "merge-pdf",
+    "title": "Merge PDF Files",
+    "meta_title": "Merge PDF Files Online - Combine PDFs Free | EasyPDFTools",
+    "meta_description": "Combine several PDF files into one document in the order you choose. Free, no signup, up to 20 files and 30 MB in total.",
+    "intro": [
+      "This tool joins two or more PDF files into a single document, keeping the pages of each file in their original order. It is useful for assembling applications, reports, invoices or any set of documents that need to be sent together.",
+      "Add your files, move them up or down until the order is right, and download the merged PDF. The pages are joined as they are, without recompressing them."
+    ],
+    "steps": [
+      "Add at least two PDF files (up to 20 files and 30 MB in total).",
+      "Use the arrow buttons to set the order.",
+      "Press Convert & download to get one merged PDF."
+    ],
+    "faqs": [
+      {"q": "How many files can I merge?", "a": "Up to 20 PDF files per request, with a combined size of up to 30 MB."},
+      {"q": "Can I change the order of the files?", "a": "Yes. Use the up and down arrows next to each file before you merge."},
+      {"q": "The merged file is too large to send. What can I do?", "a": "Run the merged PDF through the Compress PDF tool to reduce its size."},
+      {"q": "Can I merge password-protected PDFs?", "a": "No. Remove the password first, then merge the files."}
+    ]
+  },
+  {
+    "slug": "split-pdf",
+    "core_tool": "split-pdf",
+    "title": "Split PDF",
+    "meta_title": "Split PDF - Extract Pages or Page Ranges | EasyPDFTools",
+    "meta_description": "Split a PDF into single pages or custom page ranges and download the parts in a ZIP file. Free and no signup.",
+    "intro": [
+      "This tool splits a PDF into smaller files. Leave the page range empty to get every page as its own PDF, or type ranges such as 1-3, 5, 8-10 to get one PDF for each range.",
+      "The results are always delivered together in one ZIP file. Files are named by page or range, for example page_001.pdf or part_01_pages_1-3.pdf, so they are easy to tell apart."
+    ],
+    "steps": [
+      "Upload your PDF (up to 30 MB).",
+      "Optionally type the page ranges, separated by commas, for example 1-3, 5, 8-10.",
+      "Press Convert & download and unzip the result."
+    ],
+    "faqs": [
+      {"q": "What happens if I leave the page range empty?", "a": "Every page of the PDF becomes its own PDF file inside the ZIP."},
+      {"q": "How do I write the page ranges?", "a": "Separate them with commas. Use a dash for a range, for example 1-3, 5, 8-10 gives three files."},
+      {"q": "Why do I get a ZIP file?", "a": "Splitting creates several files, so they are delivered together in one ZIP archive."}
+    ]
+  },
+  {
+    "slug": "compress-pdf",
+    "core_tool": "compress-pdf",
+    "title": "Compress PDF",
+    "meta_title": "Compress PDF - Reduce File Size Online | EasyPDFTools",
+    "meta_description": "Reduce the size of a PDF by recompressing its images. Choose Light, Balanced or Maximum. Free and no signup; results depend on the file.",
+    "intro": [
+      "This tool makes a PDF smaller by recompressing the images inside it, scaling down very large ones, and compressing the internal data of each page. You can choose Light, Balanced or Maximum compression, and after processing it shows how much space was saved.",
+      "PDFs full of photos or scans shrink the most. A PDF that is mostly text, or that was already optimised, may not get much smaller. If the result would not be smaller, you receive the original file unchanged."
+    ],
+    "steps": [
+      "Upload your PDF (up to 30 MB).",
+      "Choose a compression level. Balanced is a good starting point.",
+      "Press Convert & download and compare the sizes shown."
+    ],
+    "faqs": [
+      {"q": "Which compression level should I use?", "a": "Start with Balanced. If the file is still too large, try Maximum, which lowers image quality more. Light keeps the most detail."},
+      {"q": "Will compression reduce image quality?", "a": "Yes, images are recompressed and some are scaled down. Higher levels reduce quality more. Text is not affected."},
+      {"q": "Why did my file not get smaller?", "a": "Text-only or already optimised PDFs have little left to compress. In that case the original file is returned."}
+    ]
+  },
+  {
+    "slug": "sign-pdf",
+    "core_tool": "sign-pdf",
+    "title": "Sign PDF",
+    "meta_title": "Sign PDF Online - Draw and Place Your Signature | EasyPDFTools",
+    "meta_description": "Draw or upload your signature and place it on any page of a PDF. It runs in your browser, so the file is not uploaded. Image stamp, not a certified signature.",
+    "intro": [
+      "This tool lets you draw your signature with a mouse, finger or stylus, or upload an image of it, and then place it anywhere on your PDF. You can stamp it on one page or on every page, choose the ink colour, and download the signed file.",
+      "Signing runs entirely in your browser, so your PDF is not uploaded to our server. The signature is an image stamp, not a certified digital signature."
+    ],
+    "steps": [
+      "Open the PDF in the signer (up to 30 MB).",
+      "Draw your signature on the pad, or upload an image of it.",
+      "Click the page where it should go, then download the signed PDF."
+    ],
+    "faqs": [
+      {"q": "Is my PDF uploaded to a server?", "a": "No. Signing runs in your browser. The tool loads two code libraries from a public content network, but your PDF stays on your device."},
+      {"q": "Is this a legally valid signature?", "a": "Whether an image signature is accepted depends on your country and the type of document. This tool adds an image stamp, not a certified digital signature, so check with the person or organisation who needs the document."},
+      {"q": "Can I sign on my phone?", "a": "Yes. The signature pad works with touch screens."},
+      {"q": "Can I sign every page at once?", "a": "Yes. Tick All pages before you click, and the signature is placed at the same spot on every page."}
+    ]
+  },
+  {
+    "slug": "ocr-pdf",
+    "core_tool": "ocr-pdf",
+    "title": "Scan to Word (OCR)",
+    "meta_title": "Scanned PDF to Word - OCR Text Recognition | EasyPDFTools",
+    "meta_description": "Turn a scanned PDF into an editable Word document with OCR. Supports Arabic, English and more. First 2 pages per request; free and no signup.",
+    "intro": [
+      "This tool reads text from scanned or image-only PDFs using Google Cloud Vision and saves it in an editable Word (.docx) document. Choose the document language, such as Arabic, English, or Arabic and English together, or leave it on auto-detect.",
+      "To keep the service free and fast, only the first 2 pages of each file are processed per request. The pages are sent as images to Google Cloud Vision for text recognition. Accuracy depends on the quality of the scan, so check the result."
+    ],
+    "steps": [
+      "Upload your scanned PDF (up to 30 MB).",
+      "Select the document language, or leave Auto-detect.",
+      "Press Convert & download and review the text in Word."
+    ],
+    "faqs": [
+      {"q": "How many pages are processed?", "a": "The first 2 pages of each uploaded PDF. For longer documents, use Split PDF to cut the next pages into a separate file and run them again."},
+      {"q": "Can I upload a photo instead of a PDF?", "a": "Not directly. Turn the photo into a PDF with the JPG to PDF tool first, then upload that PDF."},
+      {"q": "Which languages are supported?", "a": "You can choose Auto-detect, Arabic and English together, Arabic, English, German, French, Spanish or Italian."},
+      {"q": "Where is my file processed?", "a": "The pages are sent as images to Google Cloud Vision for text recognition, then the result is returned to you. Files are not kept on our server."}
+    ]
+  },
+  {
     "slug": "compress-pdf-for-email",
     "core_tool": "compress-pdf",
     "title": "Compress PDF for Email",
-    "meta_title": "Compress PDF for Email Attachment Free | EasyPDFTools",
-    "meta_description": "Quickly reduce PDF file sizes to bypass the 25MB Gmail and Outlook attachment limits. Free, fast, and processes entirely in your browser.",
+    "meta_title": "Compress PDF for Email Attachments | EasyPDFTools",
+    "meta_description": "Make a PDF smaller so it fits email attachment limits. Choose a compression level. Files are processed temporarily and not kept. Results depend on the file.",
+    "intro": [
+      "Email providers limit the size of attachments, commonly to around 20-25 MB, and many company mail servers set the limit lower. A PDF with photos or scanned pages can easily go over that limit.",
+      "This tool recompresses the images in your PDF and shows you the size before and after. Your file is processed temporarily on our server and is not kept. If the PDF is mostly text, it may not get much smaller."
+    ],
+    "steps": [
+      "Upload the PDF you want to send (up to 30 MB).",
+      "Choose Balanced first. If it is still too big, try Maximum.",
+      "Download the smaller file and attach it to your email."
+    ],
     "faqs": [
-      {"q": "What is the maximum PDF size for email?", "a": "Gmail and Yahoo limit attachments to 25MB, while Outlook limits them to 20MB. Our tool reduces your PDF to safely fit under these limits."},
-      {"q": "Will compression ruin my document?", "a": "No. We use intelligent downscaling that optimizes images and removes invisible metadata while keeping all text perfectly crisp and readable."}
+      {"q": "What is the usual email attachment limit?", "a": "It varies by provider and by company. Many allow about 20-25 MB, and some allow less, so check the limit of your own email service."},
+      {"q": "It is still too large. What now?", "a": "Try the Maximum level. You can also use Split PDF to send the document in parts, or share a download link instead of an attachment."},
+      {"q": "Will the text stay sharp?", "a": "Yes. Compression affects the images inside the PDF, not the text."}
     ]
   },
   {
     "slug": "compress-pdf-under-100kb",
     "core_tool": "compress-pdf",
     "title": "Compress PDF Under 100KB",
-    "meta_title": "Compress PDF Under 100KB Free | EasyPDFTools",
-    "meta_description": "Shrink PDF files to under 100KB for government portals, university applications, and strict web forms.",
+    "meta_title": "Compress PDF Towards 100KB - Smaller PDF Online | EasyPDFTools",
+    "meta_description": "Shrink a PDF as far as possible for strict upload limits. Free and no signup. There is no guarantee of reaching 100KB, especially for image-heavy files.",
+    "intro": [
+      "Some government, university and job portals only accept PDF files of about 100 KB or less. This tool can help by recompressing the images in your PDF and scaling down very large ones at its Maximum level.",
+      "It cannot promise an exact size. A text-based PDF may already be small, while a scan or a photo-heavy PDF may stay above 100 KB even at the strongest setting. The tool shows the size before and after so you can see the result."
+    ],
+    "steps": [
+      "Upload your PDF (up to 30 MB).",
+      "Choose the Maximum compression level.",
+      "Download the result and check its size against the portal's limit."
+    ],
     "faqs": [
-      {"q": "How do I compress a PDF to under 100KB?", "a": "Upload your file and select the 'Maximum' compression level. This aggressively optimizes image streams to hit strict government and academic upload limits."},
-      {"q": "Are my sensitive documents stored?", "a": "Never. EasyPDFTools processes everything in memory and automatically drops the file the moment your download begins."}
+      {"q": "Will my PDF reach 100KB?", "a": "Not always. Simple documents often shrink a lot, but scans and photo-heavy PDFs may stay larger. If that happens, try scanning at a lower resolution or splitting the document."},
+      {"q": "How much quality will I lose?", "a": "Maximum compression lowers image quality noticeably. Text stays readable, but photos and scanned pages can look softer."},
+      {"q": "What if the file does not get smaller?", "a": "If the result would not be smaller, you receive the original file unchanged, and the page tells you so."}
     ]
   },
   {
     "slug": "convert-bank-statement-to-excel",
     "core_tool": "pdf-to-excel",
     "title": "Convert Bank Statement to Excel",
-    "meta_title": "Convert PDF Bank Statements to Excel (.xlsx) | EasyPDFTools",
-    "meta_description": "Extract tables, transaction histories, and financial data from PDF bank statements directly into an editable Excel spreadsheet.",
+    "meta_title": "Convert PDF Bank Statement to Excel (.xlsx) | EasyPDFTools",
+    "meta_description": "Turn a PDF bank statement with selectable text into an Excel (.xlsx) spreadsheet. Free and no signup. Always check the numbers after export.",
+    "intro": [
+      "This tool converts a PDF bank statement into an Excel (.xlsx) spreadsheet. It reads the text on each page and splits every line into cells wherever there is a wide gap, so dates, descriptions and amounts usually end up in separate columns.",
+      "It works on statements downloaded from your bank as PDFs with selectable text. The extraction is based on text spacing, so results vary between banks. Compare the totals with your original statement before you rely on the spreadsheet."
+    ],
+    "steps": [
+      "Upload your PDF bank statement (up to 30 MB).",
+      "Press Convert & download.",
+      "Open the .xlsx file and check dates, descriptions and amounts against the statement."
+    ],
     "faqs": [
-      {"q": "Does this tool keep the table formatting?", "a": "Yes. Our extraction engine specifically looks for tabular data and recreates the rows and columns accurately in the resulting .xlsx file."},
-      {"q": "Is it safe to upload financial statements?", "a": "Absolutely. Files are processed securely in temporary server memory and are never saved to disk, ensuring your financial privacy."}
+      {"q": "Why are some columns out of place?", "a": "Columns are detected from spacing in the text, so statements with unusual layouts may need manual clean-up in Excel."},
+      {"q": "My statement is a scan. Can I use this?", "a": "Not directly, because a scan has no real text. Scan to Word (OCR) can read the first 2 pages into Word, and you can copy the table from there."},
+      {"q": "Is it safe to upload a bank statement?", "a": "Your file is processed temporarily to create the spreadsheet and is not kept or shared. If you prefer, remove account numbers from the PDF before uploading."}
     ]
   },
   {
     "slug": "convert-pdf-invoice-to-excel",
     "core_tool": "pdf-to-excel",
     "title": "Convert PDF Invoice to Excel",
-    "meta_title": "Convert PDF Invoices to Excel Spreadsheets | EasyPDFTools",
-    "meta_description": "Turn digital PDF invoices and purchase orders into structured Excel data for easier accounting and bookkeeping.",
+    "meta_title": "Convert PDF Invoice to Excel (.xlsx) | EasyPDFTools",
+    "meta_description": "Extract the text and line items of a digital PDF invoice into an Excel (.xlsx) spreadsheet. Free and no signup. Verify totals after export.",
+    "intro": [
+      "This tool extracts the content of a digital PDF invoice into an Excel (.xlsx) spreadsheet. Item descriptions, quantities, prices and totals are split into cells based on the spacing in the text, and numbers are stored as real numbers so you can sum them.",
+      "It works on invoices that contain selectable text, such as those exported from accounting software. Layouts differ a lot between suppliers, so check each line and the grand total against the original invoice."
+    ],
+    "steps": [
+      "Upload your PDF invoice (up to 30 MB).",
+      "Press Convert & download.",
+      "Open the spreadsheet and verify the line items and totals."
+    ],
     "faqs": [
-      {"q": "Can I convert multiple invoices?", "a": "Currently, you can process one PDF invoice at a time. If your PDF contains multiple pages of invoices, they will all be exported into a single workbook."},
-      {"q": "What if my invoice is a scanned image?", "a": "If the invoice is a flat image without selectable text, use our 'Scan to Word (OCR)' tool first to extract the data."}
+      {"q": "Can I convert several invoices at once?", "a": "No. Convert one PDF at a time. If a single PDF contains several invoices, all pages are placed in one worksheet, each page starting with a label."},
+      {"q": "My invoice is a scan or a photo. What can I do?", "a": "A scan has no real text to extract. Turn the photo into a PDF with JPG to PDF, then use Scan to Word (OCR) to read the first 2 pages."},
+      {"q": "Does it keep the invoice design?", "a": "No. You get the data in cells, not the visual layout, logo or colours."}
     ]
   },
   {
     "slug": "scan-arabic-pdf-to-word",
     "core_tool": "ocr-pdf",
     "title": "Scan Arabic PDF to Word",
-    "meta_title": "Arabic PDF to Word OCR Converter | EasyPDFTools",
-    "meta_description": "Extract right-to-left (RTL) Arabic text from scanned PDFs and images into an editable Word document using Google Vision OCR.",
+    "meta_title": "Scan Arabic PDF to Word - Arabic OCR | EasyPDFTools",
+    "meta_description": "Convert a scanned Arabic PDF into an editable Word document with OCR. Supports Arabic and English together. First 2 pages per request.",
+    "intro": [
+      "This tool reads Arabic text from scanned or image-only PDFs using Google Cloud Vision and saves it in an editable Word document. Arabic paragraphs are set right-to-left in the Word file so they read in the correct direction.",
+      "Choose Arabic, or Arabic + English if the document mixes both languages. Only the first 2 pages of each file are processed per request, and accuracy depends on the quality of the scan. Check names, numbers and diacritics after conversion."
+    ],
+    "steps": [
+      "Upload your scanned Arabic PDF (up to 30 MB).",
+      "Select Arabic, or Arabic + English, as the document language.",
+      "Press Convert & download and review the text in Word."
+    ],
     "faqs": [
-      {"q": "Does this support right-to-left (RTL) formatting?", "a": "Yes. Our OCR engine natively recognizes Arabic script and formats the resulting Word document to respect right-to-left reading order."},
-      {"q": "Can it read mixed Arabic and English text?", "a": "Yes. Select 'Arabic + English' in the language settings before converting, and the engine will seamlessly handle bilingual documents."}
+      {"q": "Does it support mixed Arabic and English?", "a": "Yes. Choose Arabic + English as the document language."},
+      {"q": "How can I get better results?", "a": "Use a clear, straight, well-lit scan with dark text on a light background. Blurry or skewed pages reduce accuracy."},
+      {"q": "Can it read more than 2 pages?", "a": "Each request processes the first 2 pages. For longer files, split the PDF into parts and convert each part."}
     ]
   },
   {
     "slug": "extract-text-from-scanned-receipt",
     "core_tool": "ocr-pdf",
     "title": "Extract Text from Scanned Receipt",
-    "meta_title": "Scanned Receipt to Word OCR Converter | EasyPDFTools",
-    "meta_description": "Digitize paper receipts and printed bills by extracting the text into an editable Word document for expense reporting.",
+    "meta_title": "Extract Text from a Scanned Receipt (OCR) | EasyPDFTools",
+    "meta_description": "Read the text of a scanned receipt or bill into an editable Word document with OCR. Upload as PDF; photos need JPG to PDF first.",
+    "intro": [
+      "This tool reads the text from a scanned receipt or bill and puts it into an editable Word document, so you can copy amounts and details into your expense report or spreadsheet.",
+      "The OCR tool accepts PDF files only. If your receipt is a photo (JPG or PNG), first convert it with the JPG to PDF tool, then upload the PDF here. The first 2 pages of each file are processed, and small or faded print can reduce accuracy, so check the numbers."
+    ],
+    "steps": [
+      "If your receipt is a photo, convert it to PDF with JPG to PDF.",
+      "Upload the PDF and choose the language of the receipt.",
+      "Press Convert & download and check the text in Word."
+    ],
     "faqs": [
-      {"q": "How accurate is the receipt scanner?", "a": "We use Google Cloud Vision, which is highly accurate at reading faded ink, crumpled paper, and small receipt fonts."},
-      {"q": "Do I need to crop the receipt first?", "a": "No, the AI will automatically detect the text blocks anywhere on the page, regardless of the background."}
+      {"q": "Can I upload a photo of the receipt directly?", "a": "No. The OCR tool only accepts PDF files. Use JPG to PDF to turn the photo into a PDF first."},
+      {"q": "What do I get back?", "a": "An editable Word (.docx) document with the recognised text, not a plain text file."},
+      {"q": "How can I improve accuracy?", "a": "Photograph the receipt flat, in good light, with the text sharp and filling most of the frame."}
     ]
   },
   {
     "slug": "merge-tax-returns-pdf",
     "core_tool": "merge-pdf",
-    "title": "Merge Tax Returns & W2s",
-    "meta_title": "Merge Tax Returns and Financial Documents PDF | EasyPDFTools",
-    "meta_description": "Securely combine multiple tax documents, W2s, and 1099s into a single PDF file for your accountant or tax portal.",
+    "title": "Merge Tax Returns and W-2s",
+    "meta_title": "Merge Tax Returns and W-2s into One PDF | EasyPDFTools",
+    "meta_description": "Combine tax forms, W-2s, 1099s and schedules into one PDF in the order you choose. Free, no signup. Files are processed temporarily and not kept.",
+    "intro": [
+      "Accountants, tax portals and lenders often want your tax documents as a single PDF. This tool joins your return, W-2s, 1099s, schedules and supporting pages into one file, keeping each document's pages in their original order.",
+      "Add the files, move them up or down until the order is right, and download the combined PDF. Your files are processed temporarily on our server and are not kept or shared. Tax documents are sensitive, so avoid using shared or public computers."
+    ],
+    "steps": [
+      "Add your tax PDFs (up to 20 files and 30 MB in total).",
+      "Use the arrow buttons to put them in the order your accountant or portal expects.",
+      "Press Convert & download to get one combined PDF."
+    ],
     "faqs": [
-      {"q": "Is it safe to merge tax documents here?", "a": "Yes. Your highly sensitive tax documents are processed strictly in RAM and are never written to a database or storage bucket."},
-      {"q": "Can I reorder the pages?", "a": "Yes. In the tool window, you can use the up and down arrows to arrange your W2s, schedules, and main returns in the exact order you need."}
+      {"q": "Are my tax documents kept?", "a": "No. Files are processed temporarily to create your merged PDF and are not kept or shared."},
+      {"q": "The combined file is too large for the portal. What can I do?", "a": "Use the Compress PDF tool on the merged file. Compression works best on PDFs that contain scans or photos."},
+      {"q": "Can I merge password-protected PDFs?", "a": "No. Remove the password first, then merge the files."}
     ]
   },
   {
     "slug": "combine-bank-statements-pdf",
     "core_tool": "merge-pdf",
     "title": "Combine PDF Bank Statements",
-    "meta_title": "Combine Monthly Bank Statements into One PDF | EasyPDFTools",
-    "meta_description": "Merge 12 months of PDF bank statements into a single, organized document for mortgage applications or auditing.",
+    "meta_title": "Combine Bank Statements into One PDF | EasyPDFTools",
+    "meta_description": "Merge monthly PDF bank statements into a single document for a loan, mortgage or audit. Free, no signup, up to 20 files and 30 MB.",
+    "intro": [
+      "Lenders, landlords and auditors often ask for several months of bank statements in one file. This tool joins your monthly PDF statements into a single document, keeping the pages of each statement in their original order.",
+      "Add the statements, arrange them from oldest to newest using the arrow buttons, and download the result. You can combine up to 20 files with a total size of up to 30 MB per request."
+    ],
+    "steps": [
+      "Add your monthly statement PDFs (up to 20 files and 30 MB in total).",
+      "Arrange them in date order with the arrow buttons.",
+      "Press Convert & download to get one combined PDF."
+    ],
     "faqs": [
-      {"q": "Is there a limit to how many statements I can merge?", "a": "You can merge up to 20 individual PDF files at one time, as long as the total combined size is under 30MB."},
-      {"q": "Will the merged file be huge?", "a": "Merging simply stitches the files together. If the resulting file is too large to email to your broker, use our Compress PDF tool afterward."}
+      {"q": "How many statements can I combine?", "a": "Up to 20 files per request, with a combined size of up to 30 MB."},
+      {"q": "The merged file is too large to email. What can I do?", "a": "Use the Compress PDF tool on the merged file. If it still does not fit, use Split PDF to send it in parts."},
+      {"q": "Is it safe to upload bank statements?", "a": "Files are processed temporarily and are not kept or shared. If you prefer, redact account numbers before uploading."}
     ]
   },
   {
     "slug": "extract-single-page-from-pdf",
     "core_tool": "split-pdf",
     "title": "Extract a Single Page from PDF",
-    "meta_title": "Extract Single Page from PDF Document | EasyPDFTools",
-    "meta_description": "Pull out one specific page from a large PDF document and save it as its own standalone file.",
+    "meta_title": "Extract a Single Page from a PDF | EasyPDFTools",
+    "meta_description": "Pull one page, or a few pages, out of a PDF. Type the page number and download the result as a PDF inside a ZIP file. Free and no signup.",
+    "intro": [
+      "This tool pulls a single page out of a larger PDF. Type the page number you want, for example 5, and the tool creates a separate PDF containing only that page. Pages are copied as they are, without recompression.",
+      "The result is delivered inside a ZIP file, which contains the extracted PDF. You can also extract several pages or ranges at once, such as 2, 7-9, and each one becomes its own PDF in the ZIP."
+    ],
+    "steps": [
+      "Upload your PDF (up to 30 MB).",
+      "Type the page number in the page range box, for example 5.",
+      "Press Convert & download, unzip the file and open the extracted PDF."
+    ],
     "faqs": [
-      {"q": "How do I extract just one page?", "a": "Upload your file, and in the 'Page ranges' box, type the exact page number you want (for example, '5')."},
-      {"q": "Will extracting a page reduce the quality?", "a": "No. The page is extracted identically to the original without any recompression or quality loss."}
+      {"q": "How do I get just one page?", "a": "Type that page number, for example 5, in the page range box. The ZIP will contain one PDF with that page."},
+      {"q": "Why do I receive a ZIP file?", "a": "The tool is built to produce one or many files, so the result is always delivered as a ZIP. Unzip it to get your PDF."},
+      {"q": "Does extracting a page reduce quality?", "a": "No. The page is copied as it is, so text and images are unchanged."}
     ]
   },
   {
     "slug": "split-pdf-chapters",
     "core_tool": "split-pdf",
     "title": "Split PDF into Chapters",
-    "meta_title": "Split PDF Ebooks & Textbooks into Chapters | EasyPDFTools",
-    "meta_description": "Break large PDF textbooks or manuals into smaller, manageable chapter files by specifying page ranges.",
+    "meta_title": "Split a PDF into Chapters or Sections | EasyPDFTools",
+    "meta_description": "Split a long PDF, such as a textbook or manual, into chapter files by entering page ranges. Download them together in one ZIP. Free and no signup.",
+    "intro": [
+      "Long PDFs such as textbooks, manuals and reports are easier to handle when they are divided into chapters. Enter the page range for each chapter, separated by commas, and the tool creates one PDF per range.",
+      "For example, 1-15, 16-40, 41-100 produces three files. They are delivered together in one ZIP file and named by page range, such as part_02_pages_16-40.pdf, so you can see which chapter is which."
+    ],
+    "steps": [
+      "Upload your PDF (up to 30 MB).",
+      "Type the chapter page ranges, separated by commas, for example 1-15, 16-40, 41-100.",
+      "Press Convert & download and unzip the chapter files."
+    ],
     "faqs": [
-      {"q": "How do I split a book into multiple chapters?", "a": "Use comma-separated ranges. For example, typing '1-15, 16-40, 41-100' will give you three separate PDF files for those exact chapter ranges."},
-      {"q": "How do I receive the split files?", "a": "The chapters are instantly packaged into a single ZIP file so you can download them all at once."}
+      {"q": "How do I split a book into chapters?", "a": "Look up the first and last page of each chapter and enter them as ranges, for example 1-15, 16-40, 41-100. You get one PDF per range."},
+      {"q": "How do I receive the files?", "a": "They arrive together in one ZIP file. Unzip it to get a separate PDF for each range."},
+      {"q": "Do the ranges need to be in order?", "a": "Write them in the order you want the files numbered. Each range becomes its own PDF."}
     ]
   },
   {
     "slug": "sign-nda-pdf-online",
     "core_tool": "sign-pdf",
     "title": "Sign NDA PDF Online",
-    "meta_title": "Sign Non-Disclosure Agreements (NDA) Online | EasyPDFTools",
-    "meta_description": "Draw your signature and instantly stamp it onto a Non-Disclosure Agreement (NDA) entirely in your browser.",
+    "meta_title": "Sign an NDA PDF Online | EasyPDFTools",
+    "meta_description": "Draw your signature and place it on a non-disclosure agreement PDF, right in your browser. The file is not uploaded. Image stamp, not a certified signature.",
+    "intro": [
+      "Need to return a signed non-disclosure agreement quickly? Open the PDF here, draw your signature with a mouse or finger, and click where it belongs. You can then download the signed copy without printing or scanning.",
+      "Signing runs in your browser, so your agreement is not uploaded to our server. The result is an image stamp of your signature, not a certified digital signature, so confirm that the other party accepts this kind of signature."
+    ],
+    "steps": [
+      "Open your NDA PDF in the signer (up to 30 MB).",
+      "Draw your signature, or upload an image of it.",
+      "Click the signature line to place it, then download the signed PDF."
+    ],
     "faqs": [
-      {"q": "Is my confidential NDA uploaded to your servers?", "a": "No. Our signature tool runs 100% locally in your web browser. The NDA never leaves your computer."},
-      {"q": "Are these legally binding signatures?", "a": "This tool applies a standard electronic image stamp of your signature, which is widely accepted for standard NDAs and contracts, but it is not a cryptographically certified digital signature."}
+      {"q": "Is my NDA uploaded anywhere?", "a": "No. Signing happens in your browser and the document stays on your device."},
+      {"q": "Will this signature be accepted?", "a": "It depends on the other party and on local rules. This tool adds an image stamp, not a certified digital signature, so ask the other party if it is acceptable."},
+      {"q": "Can I add my signature on several pages?", "a": "Yes. Tick All pages before clicking to place it at the same spot on every page, or click on each page separately."}
     ]
   },
   {
     "slug": "sign-lease-agreement-pdf",
     "core_tool": "sign-pdf",
     "title": "Sign Lease Agreement PDF",
-    "meta_title": "Sign Rental & Lease Agreements Online | EasyPDFTools",
-    "meta_description": "Quickly sign rental contracts and lease agreements from your phone or desktop. No printing or scanning required.",
+    "meta_title": "Sign a Lease or Rental Agreement PDF Online | EasyPDFTools",
+    "meta_description": "Sign a lease or rental agreement PDF from your phone or computer by drawing your signature. Runs in your browser; image stamp, not a certified signature.",
+    "intro": [
+      "If your landlord or tenant sent you a lease as a PDF, you can sign it here without printing. Draw your signature with your finger or mouse, place it on the signature line, and download the signed copy.",
+      "Signing runs in your browser, so the agreement is not uploaded to our server. The signature is an image stamp, not a certified digital signature. Rules about electronic signatures differ by country and by document, so check what your landlord or agency requires."
+    ],
+    "steps": [
+      "Open your lease PDF in the signer (up to 30 MB).",
+      "Draw your signature on the pad, or upload an image of it.",
+      "Click the signature line, then download the signed PDF."
+    ],
     "faqs": [
-      {"q": "Can I sign on my phone?", "a": "Yes! The signature pad is fully touch-responsive. Just draw your signature with your finger and place it on the contract."},
-      {"q": "How do I place the signature?", "a": "Once you draw your signature, click 'All pages' to stamp it everywhere, or navigate to the specific signature line and click to drop it into place."}
+      {"q": "Can I sign on my phone?", "a": "Yes. The signature pad works with touch screens, so you can draw with your finger."},
+      {"q": "Is my lease uploaded?", "a": "No. Signing runs in your browser and the file stays on your device."},
+      {"q": "Does a lease need more than my signature?", "a": "Some leases need initials on several pages. Tick All pages to stamp the same mark on every page, and check any local requirements with your landlord or agency."}
     ]
   }
 ]
