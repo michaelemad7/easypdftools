@@ -19,7 +19,7 @@ main{flex:1;width:min(1100px,100%);margin:0 auto;padding:16px}
 .empty{text-align:center;color:var(--mut);display:none}
 dialog{border:1px solid var(--bd);border-radius:20px;background:var(--card);color:var(--fg);width:min(560px,94vw);padding:24px;max-height:92vh}#sign{width:min(780px,96vw)}
 dialog::backdrop{background:#0f172a99}dialog h2{margin:0 0 12px;font-size:20px}.x{position:absolute;inset-block-start:12px;inset-inline-end:12px}
-.drop{display:block;border:2px dashed var(--bd);border-radius:14px;padding:26px 12px;text-align:center;cursor:pointer}.drop.on,.drop:hover{border-color:var(--ac);background:#4f46e50d}
+.drop{position:relative;display:block;border:2px dashed var(--bd);border-radius:14px;padding:26px 12px;text-align:center;cursor:pointer}.drop.on,.drop:hover{border-color:var(--ac);background:#4f46e50d}
 .drop small{display:block;color:var(--mut)}.drop input{position:absolute;opacity:0;width:1px;height:1px}
 ul.files{list-style:none;margin:10px 0;padding:0;font-size:14px}ul.files li{display:flex;gap:6px;align-items:center;padding:4px 0}ul.files span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .opt{margin:12px 0;display:grid;gap:4px}.opt input,.opt select{width:100%;padding:8px}

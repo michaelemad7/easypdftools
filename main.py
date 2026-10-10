@@ -18,6 +18,7 @@ Configuration (all optional, set as Cloud Run environment variables):
 import asyncio
 import base64
 import html
+import json
 import logging
 import os
 import re
@@ -70,20 +71,45 @@ PDF = "application/pdf"
 ZIP = "application/zip"
 
 # slug -> (page title, meta description). Each slug gets its own crawlable URL.
-TOOLS = {
-    "pdf-to-word": ("PDF to Word Converter", "Convert PDF to an editable Word (.docx) document online. Free, fast, no signup."),
-    "pdf-to-excel": ("PDF to Excel Converter", "Extract tables and text from a PDF into an Excel (.xlsx) spreadsheet. Free, no signup."),
-    "pdf-to-jpg": ("PDF to JPG Converter", "Turn every page of a PDF into a high-quality JPG image. Free and fast."),
-    "pdf-to-text": ("PDF to Text Converter", "Extract plain text from a PDF file online. Free, no signup."),
-    "word-to-pdf": ("Word to PDF Converter", "Convert Word (.docx) documents to PDF online. Free and fast."),
-    "excel-to-pdf": ("Excel to PDF Converter", "Convert Excel (.xlsx) spreadsheets to PDF online. Free and fast."),
-    "jpg-to-pdf": ("JPG to PDF Converter", "Combine JPG and PNG images into a single PDF. Free, no signup."),
-    "merge-pdf": ("Merge PDF Files", "Combine multiple PDF files into one document online. Free and fast."),
-    "split-pdf": ("Split PDF", "Split a PDF into single pages or custom page ranges. Free and fast."),
-    "compress-pdf": ("Compress PDF", "Reduce PDF file size by recompressing images and streams. Free, no signup."),
-    "sign-pdf": ("Sign PDF", "Draw or upload your signature and place it on any page of a PDF, right in your browser."),
-    "ocr-pdf": ("Scan PDF to Word (OCR)", "Turn scanned PDFs into editable Word documents with OCR text recognition."),
+DEFAULT_PAGES = {
+    "pdf-to-word": {"title": "PDF to Word Converter", "meta_description": "Convert PDF to an editable Word (.docx) document online. Free, fast, no signup.", "core_tool": "pdf-to-word", "faqs": []},
+    "pdf-to-excel": {"title": "PDF to Excel Converter", "meta_description": "Extract tables and text from a PDF into an Excel (.xlsx) spreadsheet. Free, no signup.", "core_tool": "pdf-to-excel", "faqs": []},
+    "pdf-to-jpg": {"title": "PDF to JPG Converter", "meta_description": "Turn every page of a PDF into a high-quality JPG image. Free and fast.", "core_tool": "pdf-to-jpg", "faqs": []},
+    "pdf-to-text": {"title": "PDF to Text Converter", "meta_description": "Extract plain text from a PDF file online. Free, no signup.", "core_tool": "pdf-to-text", "faqs": []},
+    "word-to-pdf": {"title": "Word to PDF Converter", "meta_description": "Convert Word (.docx) documents to PDF online. Free and fast.", "core_tool": "word-to-pdf", "faqs": []},
+    "excel-to-pdf": {"title": "Excel to PDF Converter", "meta_description": "Convert Excel (.xlsx) spreadsheets to PDF online. Free and fast.", "core_tool": "excel-to-pdf", "faqs": []},
+    "jpg-to-pdf": {"title": "JPG to PDF Converter", "meta_description": "Combine JPG and PNG images into a single PDF. Free, no signup.", "core_tool": "jpg-to-pdf", "faqs": []},
+    "merge-pdf": {"title": "Merge PDF Files", "meta_description": "Combine multiple PDF files into one document online. Free and fast.", "core_tool": "merge-pdf", "faqs": []},
+    "split-pdf": {"title": "Split PDF", "meta_description": "Split a PDF into single pages or custom page ranges. Free and fast.", "core_tool": "split-pdf", "faqs": []},
+    "compress-pdf": {"title": "Compress PDF", "meta_description": "Reduce PDF file size by recompressing images and streams. Free, no signup.", "core_tool": "compress-pdf", "faqs": []},
+    "sign-pdf": {"title": "Sign PDF", "meta_description": "Draw or upload your signature and place it on any page of a PDF, right in your browser.", "core_tool": "sign-pdf", "faqs": []},
+    "ocr-pdf": {"title": "Scan PDF to Word (OCR)", "meta_description": "Turn scanned PDFs into editable Word documents with OCR text recognition.", "core_tool": "ocr-pdf", "faqs": []},
 }
+
+def load_seo_pages() -> dict:
+    try:
+        path = BASE_DIR / "seo_pages.json"
+        if path.is_file():
+            data = json.loads(path.read_text(encoding="utf-8"))
+            pages = {}
+            for item in data:
+                slug = item.get("slug", "").strip("/")
+                if slug:
+                    pages[slug] = {
+                        "title": item.get("title", ""),
+                        "meta_description": item.get("meta_description", ""),
+                        "core_tool": item.get("core_tool", slug),
+                        "faqs": item.get("faqs", [])
+                    }
+            if pages:
+                merged = dict(DEFAULT_PAGES)
+                merged.update(pages)
+                return merged
+    except Exception as e:
+        log.error(f"Failed to load SEO pages: {e}")
+    return DEFAULT_PAGES
+
+SEO_PAGES = load_seo_pages()
 
 # --------------------------------------------------------------------------------------
 # App setup
@@ -411,42 +437,87 @@ app.include_router(api)
 # Pages, health check and SEO files
 # --------------------------------------------------------------------------------------
 
+def _build_faq_ld_and_html(faqs: list[dict]) -> tuple[str, str]:
+    if not faqs:
+        return "", ""
+    main_entities = []
+    html_items = ['<div class="faq-container"><h2>Frequently Asked Questions</h2>']
+    for faq in faqs:
+        q = (faq.get("question") or faq.get("q") or "").strip()
+        a = (faq.get("answer") or faq.get("a") or "").strip()
+        if not q or not a:
+            continue
+        main_entities.append({
+            "@type": "Question",
+            "name": q,
+            "acceptedAnswer": {"@type": "Answer", "text": a}
+        })
+        html_items.append(f'<div class="faq-item"><h3>{html.escape(q)}</h3><p>{html.escape(a)}</p></div>')
+    
+    html_items.append("</div>")
+    if not main_entities:
+        return "", ""
+
+    ld_struct = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": main_entities
+    }
+    ld_script = f'<script type="application/ld+json">{json.dumps(ld_struct)}</script>'
+    return ld_script, "\n".join(html_items)
 
 @lru_cache(maxsize=None)
 def _template() -> str:
     return (BASE_DIR / "templates" / "index.html").read_text(encoding="utf-8")
 
-
 @lru_cache(maxsize=None)
 def render_page(slug: str = "") -> str:
     """Serve index.html with a per-tool <title>, description and canonical URL."""
     page = _template()
-    if slug:
-        title, description = TOOLS[slug]
-        page = re.sub(
-            r"<title>.*?</title>",
-            lambda _: f"<title>{html.escape(title)} | EasyPDFTools</title>",
-            page, count=1, flags=re.S,
-        )
-        page = re.sub(
-            r'(<meta\s+name="description"\s+content=")[^"]*(")',
-            lambda m: m.group(1) + html.escape(description, quote=True) + m.group(2),
-            page, count=1,
-        )
-    if 'rel="canonical"' not in page:
-        canonical = f'<link rel="canonical" href="{SITE_URL}/{slug}">'
-        page = page.replace("</head>", f"{canonical}\n</head>", 1)
+    slug_clean = slug.strip("/")
+    page_info = SEO_PAGES.get(slug_clean)
+    
+    if page_info:
+        title = page_info.get("title", "")
+        description = page_info.get("meta_description", "")
+        core_tool = page_info.get("core_tool", slug_clean)
+        faqs = page_info.get("faqs", [])
+        
+        if title:
+            page = re.sub(r"<title>.*?</title>", lambda _: f"<title>{html.escape(title)} | EasyPDFTools</title>", page, count=1, flags=re.S)
+        if description:
+            page = re.sub(r'(<meta\s+name="description"\s+content=")[^"]*(")', lambda m: m.group(1) + html.escape(description, quote=True) + m.group(2), page, count=1)
+            
+        faq_ld, faq_html = _build_faq_ld_and_html(faqs)
+        
+        head_injections = []
+        if core_tool:
+            head_injections.append(f'<meta name="core-tool" content="{html.escape(core_tool, quote=True)}">')
+        if faq_ld:
+            head_injections.append(faq_ld)
+        if 'rel="canonical"' not in page:
+            canonical_url = f"{SITE_URL}/{slug_clean}" if slug_clean else SITE_URL
+            head_injections.append(f'<link rel="canonical" href="{canonical_url}">')
+            
+        if head_injections:
+            page = page.replace("</head>", "\n".join(head_injections) + "\n</head>", 1)
+            
+        if faq_html:
+            page = re.sub(r'(<section\s+id="faq-section"[^>]*>)(.*?)(</section>)', rf"\1\n{faq_html}\n\3", page, count=1, flags=re.S)
+            
+    else:
+        if 'rel="canonical"' not in page:
+            canonical = f'<link rel="canonical" href="{SITE_URL}/{slug_clean}">'
+            page = page.replace("</head>", f"{canonical}\n</head>", 1)
+            
     return page
-
 
 def _page_response(slug: str = "") -> HTMLResponse:
     return HTMLResponse(render_page(slug), headers={"Cache-Control": "public, max-age=300"})
 
-
 @app.get("/", include_in_schema=False)
 async def index():
     return _page_response()
-
 
 def _register_tool_page(slug: str) -> None:
     async def tool_page():
@@ -454,15 +525,12 @@ def _register_tool_page(slug: str) -> None:
 
     app.add_api_route(f"/{slug}", tool_page, methods=["GET"], include_in_schema=False)
 
-
-for _slug in TOOLS:
+for _slug in SEO_PAGES:
     _register_tool_page(_slug)
-
 
 @app.get("/healthz", include_in_schema=False)
 async def healthz():
     return {"status": "ok"}
-
 
 FAVICON_SVG = (
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'
@@ -471,28 +539,24 @@ FAVICON_SVG = (
     'font-family="sans-serif" font-weight="900" font-size="50">EP</text></svg>'
 )
 
-
 @app.get("/favicon.ico", include_in_schema=False)
 @app.get("/favicon.svg", include_in_schema=False)
 async def favicon():
     return Response(FAVICON_SVG, media_type="image/svg+xml", headers={"Cache-Control": "public, max-age=86400"})
-
 
 @app.get("/robots.txt", include_in_schema=False)
 async def robots_txt():
     body = f"User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: {SITE_URL}/sitemap.xml\n"
     return Response(body, media_type="text/plain")
 
-
 @app.get("/ads.txt", include_in_schema=False)
 async def ads_txt():
     return Response("google.com, pub-2658744954536274, DIRECT, f08c47fec0942fa0\n", media_type="text/plain")
 
-
 @app.get("/sitemap.xml", include_in_schema=False)
 async def sitemap_xml():
     urls = [f"  <url><loc>{SITE_URL}/</loc><priority>1.0</priority></url>"]
-    urls += [f"  <url><loc>{SITE_URL}/{slug}</loc><priority>0.8</priority></url>" for slug in TOOLS]
+    urls += [f"  <url><loc>{SITE_URL}/{slug}</loc><priority>0.8</priority></url>" for slug in SEO_PAGES]
     body = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(urls) + "\n</urlset>"
